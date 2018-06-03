@@ -156,7 +156,7 @@ class DateItem(models.Model):
     extended - boolean to mark extended deadlinnes
     """
 
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, related_name='dates', on_delete=models.CASCADE)
     date = models.DateField()
 
     typ = models.CharField(max_length=7, name='type', choices=DATE_ITEM_CHOICES)
