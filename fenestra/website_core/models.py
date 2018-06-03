@@ -181,3 +181,24 @@ class DateItem(models.Model):
         pfx = 'Extended ' if self.extended else ''
         sfx = f': {self.description}' if self.description else ''
         return f'{self.date} {pfx}{self.type}{sfx}'
+
+
+class NewsletterIssue(models.Model):
+    """ Stores a newsletter issue
+    date -
+    free_text - text field
+    news - news to include
+    events - events to include
+    jobs - job offers to include
+    files - attachments
+    """
+
+    date = models.DateField()
+    free_text = MarkdownxField(blank=True, null=True)
+    news = models.ManyToManyField('NewsItem')
+    dates = models.ManyToManyField('DateItem')
+    jobs = models.ManyToManyField('JobOffer')
+    files = GenericRelation(FileItem)
+
+    def __str__(self):
+        return f"Newsletter {self.date.strftime('%Y/%m')}"

@@ -9,7 +9,7 @@ from markdownx.widgets import AdminMarkdownxWidget
 from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
 
-from website_core.models import JobOffer, Event, DateItem, FileItem, NewsItem
+from website_core.models import JobOffer, Event, DateItem, FileItem, NewsItem, NewsletterIssue
 
 
 class DateInlineAdmin(admin.TabularInline):
@@ -23,7 +23,7 @@ class FileInlineAdmin(GenericTabularInline):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
 
-    list_display = ('event_name', 'date', 'location', 'published')
+    list_display = ('__str__', 'date', 'location', 'published')
     list_filter = ('published',)
     list_editable = ('published', )
 
@@ -103,6 +103,30 @@ class NewsItemAdmin(admin.ModelAdmin):
 
     def tag_list(self, obj):
         return u", ".join(o.name for o in obj.tags.all())
+
+
+@admin.register(NewsletterIssue)
+class NewsletterIssueAdmin(admin.ModelAdmin):
+
+    list_filter = ('date',)
+    fieldsets = (
+        (None, {
+            'fields': ('date', 'free_text'),
+        }),
+        ('News', { 'fields': ('news',), }),
+        ('Events', { 'fields': ('dates',), }),
+        ('Job Offers', { 'fields': ('jobs',), }),
+    )
+
+    inlines = [FileInlineAdmin]
+
+    def get_field_queryset(self, db, db_field, request):
+
+        if db_field.name in ['news', 'jobs']:
+            return db_field.remote_field.model._default_manager.filter(published=True).order_by('-date_created')
+        if db_field.name == 'dates':
+            return db_field.remote_field.model._default_manager.filter(event__published=True).order_by('date')
+        super().get_field_queryset(db, db_field, request)
 
 
 admin.site.register(DateItem)
