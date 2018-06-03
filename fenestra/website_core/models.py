@@ -18,6 +18,7 @@ DATE_ITEM_CHOICES = (
     ('occurs', 'Event occurs'),
     ('other', 'Other')
 )
+DATE_TYPES = dict(DATE_ITEM_CHOICES)
 
 
 class FileItem(models.Model):
@@ -183,7 +184,7 @@ class DateItem(models.Model):
     def __str__(self):
         pfx = 'Extended ' if self.extended else ''
         sfx = f': {self.description}' if self.description else ''
-        return f'{self.date} {pfx}{self.type}{sfx}'
+        return f'{self.date} {pfx}{DATE_TYPES[self.type]}{sfx}: {self.event}'
 
 
 class NewsletterIssue(models.Model):
