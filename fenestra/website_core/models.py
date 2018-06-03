@@ -64,6 +64,10 @@ class NewsItem(models.Model):
 
     files = GenericRelation(FileItem)
 
+    title.help_text = 'Keep it short and punchy!'
+    published.help_text = 'Should the event be displayed publicly?'
+    image.help_text = 'Image to be use as title image'
+
     def __str__(self):
         return f'{self.title} ({self.date_modified.strftime("%Y/%m/%d")})'
 
