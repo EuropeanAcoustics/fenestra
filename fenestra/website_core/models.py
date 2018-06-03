@@ -65,7 +65,7 @@ class NewsItem(models.Model):
     files = GenericRelation(FileItem)
 
     def __str__(self):
-        return f'News on {self.date_modified}: {self.title}'
+        return f'{self.title} ({self.date_modified.strftime("%Y/%m/%d")})'
 
 
 class JobOffer(models.Model):
@@ -166,5 +166,5 @@ class DateItem(models.Model):
 
     def __str__(self):
         pfx = 'Extended ' if self.extended else ''
-        sfx = f': {self.description}'
+        sfx = f': {self.description}' if self.description else ''
         return f'{self.date} {pfx}{self.type}{sfx}'
