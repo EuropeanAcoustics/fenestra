@@ -137,6 +137,11 @@ class Event(models.Model):
     gps_lon = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
     files = GenericRelation(FileItem)
 
+    published.help_text = 'Should the event be displayed publicly?'
+    location.help_text = 'Where does the event happens'
+    gps_lat.help_text = 'GPS Latitute (for mapping purposes)'
+    gps_lon.help_text = 'GPS Longitude (for mapping purposes)'
+
     def earliest_date(self):
         return self.dates.all().order_by('-date')[0]
 

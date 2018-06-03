@@ -21,9 +21,30 @@ class FileInlineAdmin(GenericTabularInline):
 
 
 @admin.register(Event)
-class EventAdmin(MarkdownxModelAdmin):
+class EventAdmin(admin.ModelAdmin):
 
+    list_display = ('event_name', 'date', 'location', 'published')
+    list_filter = ('published',)
+    list_editable = ('published', )
+
+    fieldsets = (
+        (None, {
+            'fields': (('name', 'short_name'), 'published'),
+        }),
+        ('Location', {
+            'fields': ('location', ('gps_lat', 'gps_lon')),
+        }),
+        ('About', {
+            'fields': ('short_description', 'description'),
+        })
+    )
     inlines = [DateInlineAdmin, FileInlineAdmin]
+
+    def event_name(self, obj):
+        if obj.short_name:
+            return obj.short_name
+        else:
+            obj.name
 
 
 @admin.register(JobOffer)
