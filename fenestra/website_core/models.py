@@ -39,6 +39,7 @@ class NewsItem(models.Model):
     """ News item
     title -
     content - text to be displayed in the news
+    slug - (auto)
     published - boolean for the news item to appear online
 
     date_created - (auto) date of first insertion in database
@@ -51,6 +52,7 @@ class NewsItem(models.Model):
 
     title = models.CharField(max_length=160)
     content = models.TextField()
+    slug = AutoSlugField(populate_from='title', unique=True)
     tags = TaggableManager()
 
     date_created = models.DateTimeField(auto_now_add=True)
@@ -80,6 +82,10 @@ class JobOffer(models.Model):
     """
 
     position = models.CharField(max_length=160)
+    slug = AutoSlugField(
+        populate_from='__compound_position',
+        unique=True
+    )
     entity = models.CharField(max_length=100)
     entity.help_text = 'Institution (univ., agency or company) that offers the job'
     location = models.CharField(max_length=100)
@@ -90,6 +96,9 @@ class JobOffer(models.Model):
     gps_lat = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
     gps_lon = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
     files = GenericRelation(FileItem)
+
+    def __compound_position(self):
+        return self.entity+' '+self.position
 
     def __str__(self):
         return f'{self.position} at {self.entity} in {self.location}'
