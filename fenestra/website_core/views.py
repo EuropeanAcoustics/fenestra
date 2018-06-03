@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.utils import timezone
 
-from website_core.models import Event, NewsItem, JobOffer, DateItem
+from website_core.models import Event, NewsItem, JobOffer, DateItem, NewsletterIssue
 
 
 def DetailViewFactory(model):
@@ -41,3 +41,10 @@ def index(request):
         # 'events':
         # Event.objects.filter(published=True).order_by('-date__date').distinct()[:10],
     })
+
+
+def single_newsletter(request, year, month):
+    """Returns a single newsletter identified with year and month or 404"""
+
+    newsletter = get_object_or_404(NewsletterIssue, date__month=month, date__year=year)
+    return render(request, 'newsletter-detail.html', {'nl': newsletter})

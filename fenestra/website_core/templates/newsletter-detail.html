@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load mkdx %}
+
+{% block content %}
+<h1>Newsletter {{nl.date|date:'F Y'}}</h1>
+
+{{nl.free_text|mkdx|safe}}
+{% endblock %}
+

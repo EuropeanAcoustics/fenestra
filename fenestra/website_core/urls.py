@@ -25,4 +25,5 @@ urlpatterns = [
     path('event/<slug:slug>/', DetailViewFactory(Event), name='event-detail'),
     path('news/<slug:slug>/', DetailViewFactory(NewsItem), name='newsitem-detail'),
     path('job/<slug:slug>/', DetailViewFactory(JobOffer), name='joboffer-detail'),
+    path('nuntius/<int:year>/<int:month>/', wc_views.single_newsletter, name='newsletter-detail'),
 ]
