@@ -50,6 +50,21 @@ class EventAdmin(admin.ModelAdmin):
 @admin.register(JobOffer)
 class JobOfferAdmin(admin.ModelAdmin):
 
+    list_display = ('position', 'entity', 'location', 'date_created', 'published')
+    list_filter = ('published',)
+    list_editable = ('published',)
+
+    fieldsets = (
+        (None, {
+            'fields': ('position', 'entity', 'published'),
+        }),
+        ('Location', {
+            'fields': ('location', ('gps_lat', 'gps_lon')),
+        }),
+        ('Description', {
+            'fields': ('description',),
+        })
+    )
     inlines = [FileInlineAdmin]
 
 

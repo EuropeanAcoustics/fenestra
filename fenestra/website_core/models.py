@@ -93,7 +93,6 @@ class JobOffer(models.Model):
         unique=True
     )
     entity = models.CharField(max_length=100)
-    entity.help_text = 'Institution (univ., agency or company) that offers the job'
     location = models.CharField(max_length=100)
     published = models.BooleanField(default=True)
 
@@ -102,6 +101,11 @@ class JobOffer(models.Model):
     gps_lat = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
     gps_lon = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
     files = GenericRelation(FileItem)
+
+    entity.help_text = 'Institution (univ., agency or company) that offers the job'
+    published.help_text = 'Should the event be displayed publicly?'
+    gps_lat.help_text = 'GPS Latitute (for mapping purposes)'
+    gps_lon.help_text = 'GPS Longitude (for mapping purposes)'
 
     def __compound_position(self):
         return self.entity+' '+self.position
