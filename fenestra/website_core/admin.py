@@ -40,12 +40,6 @@ class EventAdmin(admin.ModelAdmin):
     )
     inlines = [DateInlineAdmin, FileInlineAdmin]
 
-    def event_name(self, obj):
-        if obj.short_name:
-            return obj.short_name
-        else:
-            obj.name
-
 
 @admin.register(JobOffer)
 class JobOfferAdmin(admin.ModelAdmin):

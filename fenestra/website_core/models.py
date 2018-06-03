@@ -157,7 +157,10 @@ class Event(models.Model):
             return self.earliest_date().date
 
     def __str__(self):
-        return self.name
+        if self.short_name:
+            return self.short_name
+        else:
+            self.name
 
 
 class DateItem(models.Model):
