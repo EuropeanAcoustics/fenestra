@@ -15,6 +15,7 @@ DATE_ITEM_CHOICES = (
     ('accept', 'Acceptation notice'),
     ('reg_end', 'Registration Deadline'),
     ('erg_end', 'Early Registration Deadline'),
+    ('occurs', 'Event occurs'),
     ('other', 'Other')
 )
 
@@ -130,6 +131,16 @@ class Event(models.Model):
     gps_lat = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
     gps_lon = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
     files = GenericRelation(FileItem)
+
+    def earliest_date(self):
+        return self.dates.all().order_by('-date')[0]
+
+    def date(self):
+        date_occurs = self.dates.filter(type='occurs')
+        if date_occurs:
+            return date_occurs[0].date
+        else:
+            return self.earliest_date().date
 
     def __str__(self):
         return self.name
