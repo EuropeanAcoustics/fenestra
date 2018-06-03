@@ -1,0 +1,10 @@
+{% include 'base.html' %}
+{% load mkdx %}
+
+{% block content %}
+	<header>
+		<h1>{{object.title}}</h1>
+		<div class=desc>
+			{{object.content|mkdx|safe}}
+		</div>
+{% endblock %}
