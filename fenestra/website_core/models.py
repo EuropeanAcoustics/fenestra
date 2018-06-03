@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
+from taggit.managers import TaggableManager
+from taggit_labels.widgets import LabelWidget
 from autoslug import AutoSlugField
 from markdownx.models import MarkdownxField
 
@@ -49,6 +51,7 @@ class NewsItem(models.Model):
 
     title = models.CharField(max_length=160)
     content = models.TextField()
+    tags = TaggableManager()
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)

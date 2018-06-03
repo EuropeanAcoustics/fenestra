@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'markdownx',
-    'autoslug',
+    'taggit',  # Tags management
+    'taggit_labels',  # Managed tags selection
+    'markdownx',  # Extended TextField
+    'autoslug',  # Slugs management for nice URLs
     'website_core'
 ]
 
@@ -124,3 +126,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+TAGGIT_TAGS_FROM_STRING = 'fenestra.utils.lowercase_tags'
