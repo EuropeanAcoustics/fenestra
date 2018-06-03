@@ -16,10 +16,12 @@ Including another URLconf
 from django.urls import path, re_path, include
 
 from website_core.views import DetailViewFactory
+import website_core.views as wc_views
 from website_core.models import Event, NewsItem, JobOffer
 
 
 urlpatterns = [
+    path('', wc_views.index, name='index'),
     path('event/<slug:slug>/', DetailViewFactory(Event), name='event-detail'),
     path('news/<slug:slug>/', DetailViewFactory(NewsItem), name='newsitem-detail'),
     path('job/<slug:slug>/', DetailViewFactory(JobOffer), name='joboffer-detail'),

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>News</h1>
+
+<ul>
+    {% for ni in news_items %}
+        <li><a href='{% url 'newsitem-detail' ni.slug %}'>{{ni.title}}</a></li>
+    {% endfor %}
+</ul>
+
+<h1>Events</h1>
+
+<ul>
+    {% for d in events %}
+    <li>{{d.date|date:'Y, M d'}} - <a href='{% url 'event-detail' d.event.slug %}'>{{d.event.name}}</a></li>
+    {% endfor %}
+</ul>
+
+<h1>Job Offers</h1>
+
+<ul>
+    {% for jo in job_offers %}
+        <li><a href='{% url 'joboffer-detail' jo.slug %}'>{{jo.position}}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
