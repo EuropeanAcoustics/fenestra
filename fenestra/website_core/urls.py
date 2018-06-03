@@ -14,8 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, re_path, include
-from website_core.views import EventDetailView
+
+from website_core.views import DetailViewFactory
+from website_core.models import Event, NewsItem, JobOffer
+
 
 urlpatterns = [
-     path('event/<slug:slug>/', EventDetailView.as_view(), name='event-detail'),
+    path('event/<slug:slug>/', DetailViewFactory(Event), name='event-detail'),
+    path('news/<slug:slug>/', DetailViewFactory(NewsItem), name='newsitem-detail'),
+    path('job/<slug:slug>/', DetailViewFactory(JobOffer), name='joboffer-detail'),
 ]
