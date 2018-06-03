@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from django.utils import timezone
 
 from website_core.models import Event, NewsItem, JobOffer, DateItem, NewsletterIssue
@@ -23,6 +24,27 @@ def DetailViewFactory(model):
             context['now'] = timezone.now()
             return context
     return DV.as_view()
+
+
+def ListViewFactory(model):
+    """ Factory function for ListViews of *published* model instances
+
+    Templates must be stored in templates/generic/<lowercase model name>_list.html
+    """
+
+    if not getattr(model, 'published'):
+        raise AttributeError(f'Model {model.__name__} has no "published" attribute')
+
+    class LV(ListView):
+        queryset = model.objects.filter(published=True).order_by('-date_created')
+        template_name = f'generic/{model.__name__.lower()}_list.html'
+        pagination = 50
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['now'] = timezone.now()
+            return context
+    return LV.as_view()
 
 
 def index(request):

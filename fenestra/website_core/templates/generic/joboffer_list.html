@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<ul>
+{% for jo in object_list %}
+	<li><a href="{% url 'joboffer-detail' jo.slug %}">{{jo.position}} at {{jo.entity}}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

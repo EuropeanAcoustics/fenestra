@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.urls import path, re_path, include
 
-from website_core.views import DetailViewFactory
+from website_core.views import DetailViewFactory, ListViewFactory
 import website_core.views as wc_views
 from website_core.models import Event, NewsItem, JobOffer
 
 
 urlpatterns = [
     path('', wc_views.index, name='index'),
-    path('event/<slug:slug>/', DetailViewFactory(Event), name='event-detail'),
+    path('events/<slug:slug>/', DetailViewFactory(Event), name='event-detail'),
     path('news/<slug:slug>/', DetailViewFactory(NewsItem), name='newsitem-detail'),
-    path('job/<slug:slug>/', DetailViewFactory(JobOffer), name='joboffer-detail'),
+    path('jobs/<slug:slug>/', DetailViewFactory(JobOffer), name='joboffer-detail'),
+    path('news/', ListViewFactory(NewsItem), name='newsitem-list'),
+    path('jobs/', ListViewFactory(JobOffer), name='joboffer-list'),
     path('nuntius/<int:year>/<int:month>/', wc_views.single_newsletter, name='newsletter-detail'),
 ]
