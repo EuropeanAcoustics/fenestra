@@ -52,7 +52,7 @@ class NewsItem(models.Model):
     """
 
     title = models.CharField(max_length=160)
-    content = models.TextField()
+    content = MarkdownxField()
     slug = AutoSlugField(populate_from='title', unique=True)
     tags = TaggableManager()
 
@@ -83,6 +83,7 @@ class JobOffer(models.Model):
     """
 
     position = models.CharField(max_length=160)
+    description = MarkdownxField(blank=True, null=True)
     slug = AutoSlugField(
         populate_from='__compound_position',
         unique=True
@@ -125,7 +126,7 @@ class Event(models.Model):
     short_description = models.CharField(max_length=100, null=True, blank=True)
     slug = AutoSlugField(populate_from='name', unique=True)
     published = models.BooleanField(default=True)
-    description = MarkdownxField()
+    description = MarkdownxField(blank=True, null=True)
 
     location = models.CharField(max_length=100)
     gps_lat = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
