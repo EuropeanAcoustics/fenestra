@@ -1,0 +1,62 @@
+@media (max-width: 550px) {
+	.hide_to_phablet {
+		display:none;
+	}
+}
+
+
+.top {
+	display: table; 
+	margin: 0 auto;
+}	
+	
+.logo_EAA {
+    vertical-align: middle;
+    display: table-cell;
+	padding: 5px;
+}
+.description_EAA {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+a {
+	color: #ff3f00;
+}
+
+a:hover, a:active {
+	color: #ee1f00;
+}
+
+.blue1-bg {background: #00aad4; color: #ffffff; margin: 0; padding: 5px;}
+.green1-bg {background: #00c1ad; color: #ffffff; margin: 0; padding: 5px;}
+.green1-bg:hover {background: rgba(0,193,173,0.8);}
+
+.button .white {
+	  border: 1px solid #fff;
+	  color: #fff;
+}
+.video-container {
+	position:relative;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	overflow:hidden;
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+
+footer {
+    font-size: 16px;
+    line-height: 1.6; 
+	width: 100%;
+	color: #ffffff;
+	background-color: #000000;
+	border-top: 1px solid #999999;
+}
