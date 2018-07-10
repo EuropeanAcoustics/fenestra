@@ -90,7 +90,7 @@ class JobOffer(models.Model):
     position = models.CharField(max_length=160)
     description = MarkdownxField(blank=True, null=True)
     slug = AutoSlugField(
-        populate_from='__compound_position',
+        populate_from=lambda ins: ins.entity+' '+ins.position,
         unique=True
     )
     entity = models.CharField(max_length=100)
@@ -107,9 +107,6 @@ class JobOffer(models.Model):
     published.help_text = 'Should the event be displayed publicly?'
     gps_lat.help_text = 'GPS Latitute (for mapping purposes)'
     gps_lon.help_text = 'GPS Longitude (for mapping purposes)'
-
-    def __compound_position(self):
-        return self.entity+' '+self.position
 
     def __str__(self):
         return f'{self.position} at {self.entity} in {self.location}'
