@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load mkdx %}
+
+{% block content %}
+<h1>{{page.title|capfirst}}</h1>
+
+{{page.content|mkdx|safe}}
+{% endblock %}
+

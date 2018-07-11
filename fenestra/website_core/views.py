@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.utils import timezone
+from django.http import Http404
 
 from website_core.models import Event, NewsItem, JobOffer, DateItem, NewsletterIssue, Organisation, Page
 
@@ -82,3 +83,18 @@ def single_newsletter(request, year, month):
 
     newsletter = get_object_or_404(NewsletterIssue, date__month=month, date__year=year)
     return render(request, 'newsletter-detail.html', {'nl': newsletter})
+
+
+def page(request, url):
+    """ If url matches a Page, display it, else if a the URL is a prefix to several pages,
+    display a list otherwise, display a 404 """
+
+    try:
+        exact_page = Page.objects.get(url=url, published=True)
+        return render(request, 'page.html', {'page': exact_page})
+    except Page.DoesNotExist:
+        list_pages = Page.objects.filter(url__startswith=url, published=True)
+        if len(list_pages) == 0:
+            raise Http404('No page found.')
+        else:
+            return render(request, 'pages_list.html', {'pages': list_pages})
