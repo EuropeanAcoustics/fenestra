@@ -73,6 +73,34 @@ class NewsItem(models.Model):
         return f'{self.title} ({self.date_modified.strftime("%Y/%m/%d")})'
 
 
+class Organisation(models.Model):
+    """ Organisation
+    Represents a member of the EAA
+
+    name --
+    website_url --
+    contact_mail --
+
+    free_text -- to be displayed on the page
+
+    map_object -- JS to be interpreted upon creating the map
+    on_map -- boolean controlling display on map
+    """
+
+    name = models.CharField(max_length=100)
+    website_url = models.URLField()
+    contact_mail = models.EmailField()
+    logo = models.ImageField(null=True, blank=True, upload_to='uploads/organisations/')
+
+    free_text = MarkdownxField(blank=True, null=True)
+
+    map_object = models.TextField()
+    on_map = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
 class JobOffer(models.Model):
     """Job offer item
     position -
@@ -130,6 +158,7 @@ class Event(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True)
     published = models.BooleanField(default=True)
     description = MarkdownxField(blank=True, null=True)
+    organizer  = models.ForeignKey(Organisation, null=True, blank=True, on_delete=models.SET_NULL)
 
     location = models.CharField(max_length=100)
     gps_lat = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
@@ -140,6 +169,7 @@ class Event(models.Model):
     location.help_text = 'Where does the event happens'
     gps_lat.help_text = 'GPS Latitute (for mapping purposes)'
     gps_lon.help_text = 'GPS Longitude (for mapping purposes)'
+    organizer.help_text = 'Pick one of the existing organisations or use the description field to specify'
 
     def earliest_date(self):
         return self.dates.all().order_by('-date')[0]
