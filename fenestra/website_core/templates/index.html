@@ -25,4 +25,12 @@
     {% endfor %}
 </ul>
 
+<h1>Organisations</h1>
+
+<ul>
+    {% for o in organisations %}
+        <li><a href='{% url 'organisation-detail' o.slug %}'>{{o.name}}</a></li>
+    {% endfor %}
+</ul>
+
 {% endblock %}

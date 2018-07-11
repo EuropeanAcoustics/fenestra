@@ -64,12 +64,14 @@ def index(request):
     news_items - list of 10 news items ordered by decreasing date of creation
     job_offers - list of 10 job offers ordered by decreasing date of creation
     events - list of the 10 next deadlines for events ordered by decreasing date
+    organisations -  list of all organisations
     """
 
     return render(request, 'index.html', {
         'news_items': NewsItem.objects.filter(tags__name__in=['front'], published=True).order_by('-date_created')[:10],
         'job_offers': JobOffer.objects.filter(published=True).order_by('-date_created')[:10],
-        'events': DateItem.objects.filter(event__published=True).filter(date__gte=timezone.now()).order_by('-date')[:10]
+        'events': DateItem.objects.filter(event__published=True).filter(date__gte=timezone.now()).order_by('-date')[:10],
+        'organisations': Organisation.objects.all()
         # 'events':
         # Event.objects.filter(published=True).order_by('-date__date').distinct()[:10],
     })
