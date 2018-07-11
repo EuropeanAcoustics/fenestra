@@ -78,6 +78,7 @@ class Organisation(models.Model):
     Represents a member of the EAA
 
     name --
+    slug -- (auto) based on name
     website_url --
     contact_mail --
 
@@ -88,13 +89,14 @@ class Organisation(models.Model):
     """
 
     name = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from='name', unique=True)
     website_url = models.URLField()
     contact_mail = models.EmailField()
     logo = models.ImageField(null=True, blank=True, upload_to='uploads/organisations/')
 
     free_text = MarkdownxField(blank=True, null=True)
 
-    map_object = models.TextField()
+    map_object = models.TextField(blank=True, null=True)
     on_map = models.BooleanField(default=False)
 
     def __str__(self):
