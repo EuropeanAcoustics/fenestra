@@ -232,3 +232,36 @@ class NewsletterIssue(models.Model):
 
     def __str__(self):
         return f"Newsletter {self.date.strftime('%Y/%m')}"
+
+
+class Page(models.Model):
+    """Stores a website page
+
+    title --
+    summary -- short description
+
+    published -- display control
+    extra_head -- content to be added & marked safe in <head>
+    content -- formatted content
+    url -- path to the page
+    date_edited -- (auto)
+    files -- attachments
+    """
+
+    title = models.CharField(max_length=200)
+    summary = models.CharField(max_length=120, null=True, blank=True)
+    published = models.BooleanField(default=True)
+    date_edited = models.DateTimeField(auto_now=True)
+    url = models.CharField(max_length=70, unique=True)
+
+    extra_head = models.TextField(blank=True, null=True)
+    content = MarkdownxField(blank=True, null=True)
+    files = GenericRelation(FileItem)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['url']),
+        ]
+
+    def __str__(self):
+        return f'{self.title} ({self.url})'
