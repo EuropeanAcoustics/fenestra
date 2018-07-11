@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^markdownx/', include('markdownx.urls')),
     re_path(r'^', include('website_core.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 admin.site.site_header = settings.APP_NAME
