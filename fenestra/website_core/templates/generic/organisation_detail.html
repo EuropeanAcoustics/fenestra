@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load mkdx %}
+
+{% block content %}
+		<h1>{{object.name}}</h1>
+		<div class=desc>
+			{{object.free_text|mkdx|safe}}
+		</div>
+{% endblock %}

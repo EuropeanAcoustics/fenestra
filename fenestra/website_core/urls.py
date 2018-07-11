@@ -25,7 +25,9 @@ urlpatterns = [
     path('events/<slug:slug>/', DetailViewFactory(Event), name='event-detail'),
     path('news/<slug:slug>/', DetailViewFactory(NewsItem), name='newsitem-detail'),
     path('jobs/<slug:slug>/', DetailViewFactory(JobOffer), name='joboffer-detail'),
+    path('organisations/<slug:slug>/', wc_views.OrganisationsDetail.as_view(), name='organisation-detail'),
     path('news/', ListViewFactory(NewsItem), name='newsitem-list'),
     path('jobs/', ListViewFactory(JobOffer), name='joboffer-list'),
+    path('organisations/', wc_views.OrganisationsList.as_view(), name='organisation-list'),
     path('nuntius/<int:year>/<int:month>/', wc_views.single_newsletter, name='newsletter-detail'),
 ]

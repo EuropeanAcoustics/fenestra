@@ -3,7 +3,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.utils import timezone
 
-from website_core.models import Event, NewsItem, JobOffer, DateItem, NewsletterIssue
+from website_core.models import Event, NewsItem, JobOffer, DateItem, NewsletterIssue, Organisation, Page
 
 
 def DetailViewFactory(model):
@@ -45,6 +45,16 @@ def ListViewFactory(model):
             context['now'] = timezone.now()
             return context
     return LV.as_view()
+
+
+class OrganisationsList(ListView):
+    model = Organisation
+    template_name = f'generic/organisation_list.html'
+
+
+class OrganisationsDetail(DetailView):
+    model = Organisation
+    template_name = f'generic/organisation_detail.html'
 
 
 def index(request):
