@@ -6,10 +6,10 @@
 
 
 .top {
-	display: table; 
+	display: table;
 	margin: 0 auto;
-}	
-	
+}
+
 .logo_EAA {
     vertical-align: middle;
     display: table-cell;
@@ -52,9 +52,15 @@ a:hover, a:active {
 	height:100%;
 }
 
+.version_string {
+    font-size:.8em;
+    margin: 0;
+    padding: 0;
+}
+
 footer {
     font-size: 16px;
-    line-height: 1.6; 
+    line-height: 1.6;
 	width: 100%;
 	color: #ffffff;
 	background-color: #000000;

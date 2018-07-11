@@ -1,12 +1,60 @@
+{% load custom %}
+{% load static %}
 <!DOCTYPE html>
-<html>
-	<head>
-        <meta charset="utf-8" />
-		<title>base</title>
-	</head>
-	<body>
-		{% block content %}
-		{% endblock %}
-	</body>
-</html>
+<html lang="en">
+<head>
 
+  <meta charset="utf-8">
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+  <title>Euracoustics, EAA Fenestra</title>
+	<meta name="description" content="{% block meta_description %}EAA Web-portal{% endblock %}">
+  <meta name="keywords" content="EAA,european,Europe,acoustic,acoustics,association,noise,health,ear,vibrations,sound">
+  <meta name="author" content="EAA">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+	<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+  <link rel="stylesheet" href="{% static 'css/my.css' %}">
+
+
+	<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
+</head>
+<body>
+
+
+<div class="container">
+
+	<div class="row">
+		<div style="display: table; margin: 0 auto;">
+			<a href="//euracoustics.org"><img class="logo_EAA" src="{% static 'images/logo_EAA.png' %}" alt="EAA logo"/></a>
+			<span class="description_EAA">
+				<h1>European Acoustics Association</h1>
+			</span>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="text-align: center;">
+			<a class="button" href="{% url 'newsitem-list' %}">Publications</a>
+			<a class="button" href="{% url 'joboffer-list' %}">Jobs</a>
+			<a class="button" href="#">Technical Committees</a>
+			<a class="button" href="#">YAN</a><br>
+		</div>
+	</div>
+
+	<div class="content">{% block content %}{% endblock %}</div>
+</div>
+
+<footer>
+	<div class="container">
+	<p>These web pages have been created and are hosted by the <a href="://euracoustics.org">European Acoustics Association</a>, a non-profit entity established in 1992 to promote development and progress of acoustics in its different aspects, its technologies and applications.</p>
+	<p class="version_string">Fenestra2, v.{% app_version %}</p>
+	</div>
+</footer>
+
+</body>
+</html>
