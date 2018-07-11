@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 APP_NAME = 'EAA Fenestra'
+APP_VERSION = '0.0.1'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,7 +43,9 @@ INSTALLED_APPS = [
     'taggit_labels',  # Managed tags selection
     'markdownx',  # Extended TextField
     'autoslug',  # Slugs management for nice URLs
-    'website_core'
+    'template_utils',
+    'website_core',
+
 ]
 
 MIDDLEWARE = [
