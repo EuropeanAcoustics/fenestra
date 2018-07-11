@@ -89,10 +89,7 @@ class JobOffer(models.Model):
 
     position = models.CharField(max_length=160)
     description = MarkdownxField(blank=True, null=True)
-    slug = AutoSlugField(
-        populate_from=lambda ins: ins.entity+' '+ins.position,
-        unique=True
-    )
+    slug = AutoSlugField(populate_from='position', unique=True)
     entity = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     published = models.BooleanField(default=True)
