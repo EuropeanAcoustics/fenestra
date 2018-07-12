@@ -160,7 +160,7 @@ class Event(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True)
     published = models.BooleanField(default=True)
     description = MarkdownxField(blank=True, null=True)
-    organizer  = models.ForeignKey(Organisation, null=True, blank=True, on_delete=models.SET_NULL)
+    organizer = models.ForeignKey(Organisation, null=True, blank=True, on_delete=models.SET_NULL)
 
     location = models.CharField(max_length=100)
     gps_lat = models.DecimalField(null=True, blank=True, max_digits=9, decimal_places=6)
