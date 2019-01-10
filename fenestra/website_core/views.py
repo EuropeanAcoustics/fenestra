@@ -100,3 +100,13 @@ def page(request, url):
             raise Http404('No page found.')
         else:
             return render(request, 'pages_list.html', {'pages': list_pages})
+
+
+def last_nuntius(request):
+    """Display the last issue of nuntius"""
+
+    try:
+        last_issue = NewsletterIssue.objects.all().order_by('-date')[0]
+        return render(request, 'newsletter-detail.html', {'nl': last_issue})
+    except IndexError:
+        raise Http404("There is no issue of Nuntius available.")

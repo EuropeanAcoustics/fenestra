@@ -30,5 +30,6 @@ urlpatterns = [
     path('jobs/', ListViewFactory(JobOffer), name='joboffer-list'),
     path('organisations/', wc_views.OrganisationsList.as_view(), name='organisation-list'),
     path('nuntius/<int:year>/<int:month>/', wc_views.single_newsletter, name='newsletter-detail'),
+    path('nuntius/last', wc_views.last_nuntius, name='newsletter-last'),
     re_path(r'^p/(?P<url>[a-z0-9_/]+)$', wc_views.page, name='page'),
 ]
