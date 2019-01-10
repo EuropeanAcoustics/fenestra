@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from django.utils import timezone
 from django.http import Http404
 
-from website_core.models import Event, NewsItem, JobOffer, DateItem, NewsletterIssue, Organisation, Page
+from website_core.models import Event, NewsItem, JobOffer, DateItem, NewsletterIssue, Organisation, Page, IndexSection
 
 
 def DetailViewFactory(model):
@@ -69,6 +69,8 @@ def index(request):
     """
 
     return render(request, 'index.html', {
+        'sections_zone1': IndexSection.objects.filter(zone=1, published=True).order_by('-index'),
+        'sections_zone2': IndexSection.objects.filter(zone=2, published=True).order_by('-index'),
         'news_items': NewsItem.objects.filter(tags__name__in=['front'], published=True).order_by('-date_created')[:10],
         'job_offers': JobOffer.objects.filter(published=True).order_by('-date_created')[:10],
         'events': DateItem.objects.filter(event__published=True).filter(date__gte=timezone.now()).order_by('-date')[:10],

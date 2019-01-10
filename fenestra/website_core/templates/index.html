@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
+{% load mkdx %}
 
 {% block content %}
+<div>
+    {% for section in sections_zone1 %}
+    <div class='indexsection{% if section.focus %} sectionfocus{% endif %}'>
+        <h1>{{section.title}}</h1>
+
+        {{section.content|mkdx|safe}}
+    </div>
+    {% endfor %}
+</div>
+
 <h1>News</h1>
 
 <ul>
@@ -32,5 +43,15 @@
         <li><a href='{% url 'organisation-detail' o.slug %}'>{{o.name}}</a></li>
     {% endfor %}
 </ul>
+
+<div>
+    {% for section in sections_zone2 %}
+    <div class='indexsection{% if section.focus %}sectionfocus{% endif %}'>
+        <h3>{{section.title}}</h3>
+
+        {{section.content|mkdx|safe}}
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
