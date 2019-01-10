@@ -1,11 +1,61 @@
 {% extends 'base.html' %}
+{% load mkdx %}
 
 {% block content %}
+<script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 
-<ul>
-{% for n in object_list %}
-    <li><a href="{% url 'organisation-detail' n.slug %}">{{n.name}}</a></li>
-{% endfor %}
-</ul>
+<div id="chartdiv"></div>
+<div id="info">
+  <p>Hover on any highlighted country to display its description right here or read all events below.</p>
+</div>
+<style>
+#chartdiv {
+  width: 100%;
+  height: 400px;
+}
+
+#info {
+  padding: 10px;
+  background-color: #dedede;
+}
+
+#info p {
+  margin: 5px;
+}
+</style>
+<script>
+var map = AmCharts.makeChart("chartdiv", {
+  type: "map",
+  "theme": "none",
+  pathToImages: "http://www.amcharts.com/lib/3/images/",
+
+  colorSteps: 10,
+
+  dataProvider: {
+    map: "worldLow",
+    zoomLatitude: 50,
+    zoomLevel: 5,
+    zoomLongitude: -20,
+    areas: [ {% for n in object_list %} {id: '{{n.country_code}}', info: '<a href={% url "society-detail" n.slug %}>{{n.name}}</a><br/>{{n.map_text}} <a href="{{n.website_url}}">Go to website</a>'}, {% endfor %} ] },
+
+  areasSettings: {
+    autoZoom: false,
+      selectable: false
+  }
+
+});
+
+map.addListener("rollOverMapObject", function(event) {
+  document.getElementById("info").innerHTML = '<p><b>' + event.mapObject.title + '</b></p><p>' + event.mapObject.info + '</p>';
+});
+</script>
+
+<!-- <ul> -->
+<!-- {% for n in object_list %} -->
+<!--     <li><a href="{% url 'society-detail' n.slug %}">{{n.name}}</a></li> -->
+<!-- {% endfor %} -->
+<!-- </ul> -->
 
 {% endblock %}
