@@ -1,7 +1,7 @@
 backcall==0.1.0
 decorator==4.3.0
 Django==2.0.5
-django-autoslug==1.9.4.dev0
+-e git+https://github.com/Matael/django-autoslug.git#egg=django-autoslug
 django-markdownx==2.0.23
 django-taggit==0.22.2
 django-taggit-labels==0.5.1
