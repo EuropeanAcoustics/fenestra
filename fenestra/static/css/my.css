@@ -56,6 +56,16 @@ a:hover, a:active {
 	overflow:hidden;
 }
 
+.section-focus h3:before {
+	color: #0EBFE9;
+	content: ">>> ";
+}
+
+.date {
+	padding: 0 10px 0 10px;
+	color: #999999;
+}
+
 .video-container iframe, .video-container object, .video-container embed {
 	position:absolute;
 	top:0;
