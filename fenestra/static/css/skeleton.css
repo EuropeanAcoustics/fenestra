@@ -135,7 +135,7 @@ body {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   font-weight: 300; }
 h1 { font-size: 4.0rem; line-height: 1.2;  letter-spacing: -.1rem;}
 h2 { font-size: 3.6rem; line-height: 1.25; letter-spacing: -.1rem; }
@@ -175,7 +175,7 @@ a:hover {
   display: inline-block;
   height: 38px;
   padding: 0 30px;
-  color: #ccc6c0!important;
+  color: #ccc6c0;
   text-align: center;
   font-size: 11px;
   font-weight: 600;
@@ -191,7 +191,7 @@ a:hover {
   box-sizing: border-box; }
 .button:hover,
 .button:focus {
-  color: #eee0e0!important;
+  color: #eee0e0;
   border-color: #eee0e0;
   outline: 0; }
 

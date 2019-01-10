@@ -28,14 +28,26 @@ a:hover, a:active {
 	color: #ee1f00;
 }
 
+.nav {
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
 .blue1-bg {background: #00aad4; color: #ffffff; margin: 0; padding: 5px;}
 .green1-bg {background: #00c1ad; color: #ffffff; margin: 0; padding: 5px;}
 .green1-bg:hover {background: rgba(0,193,173,0.8);}
 
-.button .white {
-	  border: 1px solid #fff;
-	  color: #fff;
+.button {
+	  border: 1px solid #4682B4;
+	  color: #4682B4;
 }
+.button:hover,
+.button:focus {
+  color: #1E90FF;
+  border-color: #1E90FF;
+  outline: 0; }
+
 .video-container {
 	position:relative;
 	padding-bottom:56.25%;
