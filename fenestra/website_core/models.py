@@ -6,6 +6,7 @@ from taggit.managers import TaggableManager
 from taggit_labels.widgets import LabelWidget
 from autoslug import AutoSlugField
 from markdownx.models import MarkdownxField
+from .country_codes import COUNTRY_CHOICES
 
 
 DATE_ITEM_CHOICES = (
@@ -95,12 +96,14 @@ class Organisation(models.Model):
     name = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='name', unique=True)
     website_url = models.URLField()
+
     contact_mail = models.EmailField()
     logo = models.ImageField(null=True, blank=True, upload_to='uploads/organisations/')
 
     free_text = MarkdownxField(blank=True, null=True)
 
-    map_object = models.TextField(blank=True, null=True)
+    country_code = models.CharField(blank=True, null=True, choices=COUNTRY_CHOICES, max_length=2)
+    map_text = models.TextField(blank=True, null=True)
     on_map = models.BooleanField(default=False)
 
     def __str__(self):
