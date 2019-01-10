@@ -9,7 +9,7 @@ from markdownx.widgets import AdminMarkdownxWidget
 from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
 
-from website_core.models import JobOffer, Event, DateItem, FileItem, NewsItem, NewsletterIssue, Organisation, Page
+from website_core.models import JobOffer, Event, DateItem, FileItem, NewsItem, NewsletterIssue, Organisation, Page, IndexSection
 
 
 class DateInlineAdmin(admin.TabularInline):
@@ -127,3 +127,4 @@ admin.site.register(Page)
 admin.site.register(Organisation)
 admin.site.register(DateItem)
 admin.site.register(FileItem)
+admin.site.register(IndexSection)

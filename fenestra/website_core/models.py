@@ -19,6 +19,10 @@ DATE_ITEM_CHOICES = (
     ('other', 'Other')
 )
 DATE_TYPES = dict(DATE_ITEM_CHOICES)
+INDEXZONE_CHOICES = (
+    (1, 'Zone 1'),
+    (2, 'Zone 2')
+)
 
 
 class FileItem(models.Model):
@@ -265,3 +269,32 @@ class Page(models.Model):
 
     def __str__(self):
         return f'{self.title} ({self.url})'
+
+
+class IndexSection(models.Model):
+    """Stores a section of the front page
+    title --
+    published -- display control
+    date_edited -- (auto)
+
+    zone -- zone of the frontpage on which to display this block
+    index -- controls the order of the blocks in the zone
+    focus -- this block must have focus
+
+    content -- formatted content
+    files -- attachments
+    """
+
+    title = models.CharField(max_length=200)
+    published = models.BooleanField(default=True)
+    date_edited = models.DateTimeField(auto_now=True)
+
+    zone = models.IntegerField(choices=INDEXZONE_CHOICES)
+    index = models.IntegerField(default=0)
+    focus = models.BooleanField(default=False)
+
+    content = MarkdownxField(blank=True, null=True)
+    files = GenericRelation(FileItem)
+
+    def __str__(self):
+        return self.title
