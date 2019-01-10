@@ -4,54 +4,40 @@
 {% block content %}
 <div>
     {% for section in sections_zone1 %}
-    <div class='indexsection{% if section.focus %} sectionfocus{% endif %}'>
-        <h1>{{section.title}}</h1>
+    <div class='index-section{% if section.focus %} section-focus{% endif %}'>
+        <h2>{{section.title}}</h2>
 
         {{section.content|mkdx|safe}}
     </div>
     {% endfor %}
 </div>
 
-<h1>News</h1>
-
-<ul>
-    {% for ni in news_items %}
-        <li><a href='{% url 'newsitem-detail' ni.slug %}'>{{ni.title}}</a></li>
-    {% endfor %}
-</ul>
-
-<h1>Events</h1>
-
-<ul>
-    {% for d in events %}
-    <li>{{d.date|date:'Y, M d'}} - <a href='{% url 'event-detail' d.event.slug %}'>{{d.event.name}}</a></li>
-    {% endfor %}
-</ul>
-
-<h1>Job Offers</h1>
-
-<ul>
-    {% for jo in job_offers %}
-        <li><a href='{% url 'joboffer-detail' jo.slug %}'>{{jo.position}}</a></li>
-    {% endfor %}
-</ul>
-
-<h1>Organisations</h1>
-
-<ul>
-    {% for o in organisations %}
-        <li><a href='{% url 'organisation-detail' o.slug %}'>{{o.name}}</a></li>
-    {% endfor %}
-</ul>
+<div class="row">
+	<div class="six columns">
+	<h2>News</h2>
+		<ul>
+				{% for ni in news_items %}
+						<li><a href='{% url 'newsitem-detail' ni.slug %}'>{{ni.title}}</a></li>
+				{% endfor %}
+		</ul>
+	</div>
+	<div class="six columns">
+	<h2>Events</h2>
+		<ul>
+				{% for d in events %}
+				<li>{{d.date|date:'Y, M d'}} - <a href='{% url 'event-detail' d.event.slug %}'>{{d.event.name}}</a></li>
+				{% endfor %}
+		</ul>
+	</div>
+</div>
 
 <div>
     {% for section in sections_zone2 %}
-    <div class='indexsection{% if section.focus %}sectionfocus{% endif %}'>
-        <h3>{{section.title}}</h3>
+    <div class='index-section{% if section.focus %} section-focus{% endif %}'>
+        <h2>{{section.title}}</h2>
 
         {{section.content|mkdx|safe}}
     </div>
     {% endfor %}
 </div>
-
 {% endblock %}
