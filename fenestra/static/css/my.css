@@ -28,6 +28,17 @@ a:hover, a:active {
 	color: #ee1f00;
 }
 
+ul.news {
+  list-style: none;
+}
+ul.news li::before {
+  content: "\2022"; 
+  color: #1E90FF;
+  display: inline-block; 
+  width: 1em;
+  margin-left: -1em
+}
+
 .nav {
 	text-align: center;
 	margin-top: 15px;

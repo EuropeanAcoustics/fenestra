@@ -15,7 +15,7 @@
 <div class="row">
 	<div class="six columns">
 	<h2>News</h2>
-		<ul>
+		<ul class="news">
 				{% for ni in news_items %}
 						<li><a href='{% url 'newsitem-detail' ni.slug %}'>{{ni.title}}</a></li>
 				{% endfor %}
