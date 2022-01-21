@@ -5,7 +5,7 @@ Django==2.2.3
 django-markdownx==2.0.23
 django-taggit==0.22.2
 django-taggit-labels==0.5.1
-ipython==6.4.0
+ipython==7.16.3
 ipython-genutils==0.2.0
 jedi==0.12.0
 Markdown==2.6.11
